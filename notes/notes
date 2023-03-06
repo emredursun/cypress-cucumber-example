@@ -1,0 +1,67 @@
+1. Create folder on the desktop: cypress-cucumber-framework
+2. Open in the VSCode -drag and drop
+3. Install Cypress
+* npm init -y
+* npm install cypress --save-dev
+* npx cpress open
+* npx cypress install --force <= Use this command if Cypress is not installed
+
+4. Add Cucumber dependencies:
+* npm install --save-dev cypress-cucumber-preprocessor
+# https://www.npmjs.com/package/cypress-cucumber-preprocessor
+# https://github.com/TheBrainFamily/cypress-cucumber-example
+# https://github.com/badeball/cypress-cucumber-preprocessor
+
+Cypress Configuration
+
+5. In cypress/plugins/index.js
+Add this code:
+/// <reference types="cypress" />
+const cucumber = require('cypress-cucumber-preprocessor').default
+module.exports = (on, config) => {
+  on('file:preprocessor', cucumber())
+ 
+}
+
+6. Add support for future files to your Cypress Configuration
+
+In cypress.json, Add this code:
+
+{
+  "testFiles": "**/*.feature"
+}
+
+7. In package.json, Add bellow code:
+"cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true
+  }
+
+8. ***Running all test and recording on dashboard project
+* npx cypress run --record --key d0c492e6-aa1a-4f81-852d-f85a4631ac94
+* ./node_modules/.bin/cypress run --record --key d0c492e6-aa1a-4f81-852d-f85a4631ac94
+
+* Running specific test case and saving the rpeorts on the dashboard
+./node_modules/.bin/cypress run --spec cypress/integration/paylinn_login/paylinn_login_test.js --record --key d0c492e6-aa1a-4f81-852d-f85a4631ac94
+
+
+  SET UP IS COMPLETE -- WE CAN NOW USE CUCUMBER FEATURE
+
+  ******Create first feature file******
+  Create a feature file: paylinn_login.feature
+
+  Add Cucumber extension to your IDE via VS Code Store
+  Feature: Login Functionality
+
+  Scenario: TC01_login
+    Given user in on the application page
+    And clicks on login link
+    And user enters username and password
+    And clicks on login button
+    Then verify default page is displayed
+
+    ****Create first step definition ******
+    We will create folders for each step definition
+    The folder name must be same as feature file name
+    The step definition file name can be different (.js)
+    - create a folder : paylinn_login
+    - create a .js file : paylinn_login

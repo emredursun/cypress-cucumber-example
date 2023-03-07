@@ -1,6 +1,6 @@
 import { Given,And,Then } from "cypress-cucumber-preprocessor/steps";
 
-Given('user in on the application page', () => {
+  Given('user in on the application page', () => {
     cy.visit('https://paylinn.com/')
     
   })

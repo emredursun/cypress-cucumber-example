@@ -1,4 +1,4 @@
-@paylinn
+@smoke @paylinn
 Feature: Login Functionality
 
   @paylinn_login_function

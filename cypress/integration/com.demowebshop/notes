@@ -1,0 +1,82 @@
+*** COM.DEMOWEBSHOP CYPRESS Project**
+1. Install Cypress
+- npm init -y
+- npm install cypress --save-dev
+- npx cpress open
+- npx cypress install --force <= Use this command if Cypress is not installed
+
+2. Add Cucumber dependencies:
+- npm install --save-dev cypress-cucumber-preprocessor
+# https://www.npmjs.com/package/cypress-cucumber-preprocessor
+# https://github.com/TheBrainFamily/cypress-cucumber-example
+
+Cypress Configuration
+3. In cypress/plugins/index.js
+   Add this code:
+   /// <reference types="cypress" />
+   const cucumber = require('cypress-cucumber-preprocessor').default
+   module.exports = (on, config) => {
+   on('file:preprocessor', cucumber())
+}
+
+4. Add support for future files to your Cypress Configuration
+In cypress.json, Add this code:
+
+{
+"testFiles": "\*_/_.feature"
+}
+
+5. In package.json, Add bellow code:
+   "cypress-cucumber-preprocessor": {
+   "nonGlobalStepDefinitions": true
+   }
+
+6. \*\*\*Running all test and recording on dashboard project
+
+### DemoWebShop Tags
+- @smoke => To run the tests that has '@smoke' tag in the whole project
+- @demowebshop => To run all scenarios in 'com.demowebshop' directory
+
+*** To Run Indivudual Tests Scenarios***
+- @1.test_home_page 
+- @2.test_search_functionality
+- @3.test_shopping_cart
+- @4.test_login_functionality
+- @5.test_checkout_process
+
+- To run single scenario or multiple scenarios, the use below method command code
+* Run ```./node_modules/.bin/cypress-tags run -e TAGS='@1.test_home_page'``` in this repo. There is only one scenario that has this tag, in `com.demowebshop.feature`
+* Run ```./node_modules/.bin/cypress-tags run -e TAGS='@demowebshop'``` in this repo. There are 5 different scenarios these has this tag, in `com.demowebshop.feature`
+* Run ```./node_modules/.bin/cypress-tags run -e TAGS='@smoke'``` in this repo. There are different scenarios these has this tag, in the whole project
+
+*** To Run the tests from Cyprees Dashboard**
+- npx cypress run --record --key d0c492e6-aa1a-4f81-852d-f85a4631ac94
+- ./node_modules/.bin/cypress run --record --key d0c492e6-aa1a-4f81-852d-f85a4631ac94
+
+
+
+
+
+
+**Tests using Postman/Newman**
+
+1. Test the home page:
+    - Send a GET request to the home page and ensure that the status code is 200.
+    - Verify that the response body contains the title "Demo Web Shop".
+    - Check that the response header includes the expected content type.
+2. Test the search functionality:
+    - Send a GET request to the search endpoint with a valid search term and verify that the status code is 200.
+    - Ensure that the response body contains products related to the search term.
+    - Verify that the response time is reasonable.
+3. Test the shopping cart:
+    - Send a POST request to add a product to the cart and verify that the status code is 200.
+    - Send a DELETE request to remove a product from the cart and ensure that the status code is 200.
+    - Verify that the total price is updated correctly.
+4. Test the login functionality:
+    - Send a GET request to the login page and verify that the status code is 200.
+    - Send a POST request with valid credentials and verify that the status code is 200.
+    - Verify that the response body contains the expected user information.
+5. Test the checkout process:
+    - Send a POST request to add a product to the cart and verify that the status code is 200.
+    - Send a POST request to checkout with valid shipping and billing information and verify that the status code is 200.
+    - Verify that the response body contains the expected order information.
